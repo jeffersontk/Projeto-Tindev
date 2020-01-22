@@ -5,11 +5,14 @@
 }
 .list-container ul{
     position: relative;
-    height: 500px;
+    height: 480px;
     width: 300px;
     list-style: none;
     margin: 0 auto;
     margin-top: 40px;
+    box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.4) ;
+    background: #fff;
+    border-radius: 10px;
 }
 
 .list-container ul li{
@@ -17,7 +20,6 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.05) ;
     background: #fff;
 }
 
