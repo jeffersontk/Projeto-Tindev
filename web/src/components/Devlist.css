@@ -1,0 +1,68 @@
+.list-container{
+    background: #eee;
+    height: 100vh;
+    overflow: hidden;
+}
+.list-container ul{
+    position: relative;
+    height: 500px;
+    width: 300px;
+    list-style: none;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.list-container ul li{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.05) ;
+    background: #fff;
+}
+
+.list-container ul li img{
+    max-width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+.list-container ul li footer{
+    height: 100px;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px 20px;
+    text-align: left;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+}
+.list-container ul li footer strong{
+    font-size: 16px;
+    color: #333;
+}
+.list-container ul li footer p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #999;
+    margin-top: 5px;
+    background: #fff;
+}
+
+.list-container ul li .buttons{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+
+}
+.list-container ul li .buttons button{
+    height: 50px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3) ;
+    border: 0;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.list-container ul li .buttons button:hover img{
+    transform: translateY(-5px);
+    transition: all 0.2s;
+}
