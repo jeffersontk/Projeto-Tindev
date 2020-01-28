@@ -4,20 +4,24 @@ import api from '../services/api'
 import './Matchlist.css'
 
 export default ({ match }) => {
+    const loggedUser = match.params.id
 
     const [users, setUsers] = useState([])
+    //const [logged, setLogged] = useState('')
+
+
 
     useEffect(() => {
         async function loadUsers() {
             const response = await api.get('/devs', {
                 headers: {
-                    user: match.params.id
+                    user: loggedUser
                 }
             })
             setUsers(response.data)
         }
         loadUsers()
-    }, [match.params.id])
+    }, [loggedUser])
     return (
         <div className="list-match">
 
