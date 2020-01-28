@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Login from './src/pages/Login'
+import Routes from './src/routes'
 
 export default function App() {
   return (
-    <Login />
+    <Routes />
   );
 }
