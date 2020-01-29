@@ -101,6 +101,7 @@ export default function Main({ navigation }) {
                 <View style={styles.matchContainer}>
                     <Image style={styles.matchImage} source={itsamatch} />
                     <Image style={styles.matchAvatar} source={{ uri: matchDev.avatar }} />
+
                     <Text style={styles.matchName}>{matchDev.name}</Text>
                     <Text style={styles.matchBio}>{matchDev.bio}</Text>
 
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     },
     matchContainer: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rbga(0,0,0, 0.8)',
+        backgroundColor: 'rgba(0,0,0, 0.8)',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -198,8 +199,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     matchAvatar: {
-        width: 160,
-        height: 160,
+        width: 100,
+        height: 100,
         borderRadius: 80,
         borderWidth: 5,
         borderColor: '#fff',
