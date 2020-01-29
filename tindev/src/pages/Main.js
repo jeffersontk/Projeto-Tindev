@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import io from 'socket.io-client'
 import { AsyncStorage } from 'react-native'
 import { SafeAreaView, Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 
@@ -7,11 +8,13 @@ import api from '../services/api'
 import logo from '../assets/logo.png'
 import dislike from '../assets/dislike.png'
 import like from '../assets/like.png'
+import itsamatch from '../assets/itsamatch.png'
 
 export default function Main({ navigation }) {
     const id = navigation.getParam('user')
 
     const [users, setUsers] = useState([])
+    const [matchDev, setMatchDev] = useState(null)
     useEffect(() => {
         async function loadUsers() {
             const response = await api.get('/devs', {
@@ -22,6 +25,15 @@ export default function Main({ navigation }) {
             setUsers(response.data)
         }
         loadUsers()
+    }, [id])
+    useEffect(() => {
+        const socket = io('http://192.168.15.11:3333', {
+            query: { user: id }
+        })
+
+        socket.on('match', dev => {
+            setMatchDev(dev)
+        })
     }, [id])
 
     async function handleLike() {
@@ -81,6 +93,19 @@ export default function Main({ navigation }) {
                         onPress={handleLike}
                         style={styles.button}>
                         <Image source={like} />
+                    </TouchableOpacity>
+                </View>
+            )}
+
+            {matchDev && (
+                <View style={styles.matchContainer}>
+                    <Image style={styles.matchImage} source={itsamatch} />
+                    <Image style={styles.matchAvatar} source={{ uri: matchDev.avatar }} />
+                    <Text style={styles.matchName}>{matchDev.name}</Text>
+                    <Text style={styles.matchBio}>{matchDev.bio}</Text>
+
+                    <TouchableOpacity onPress={() => setMatchDev(null)}>
+                        <Text style={styles.closeMatch}>FECHAR</Text>
                     </TouchableOpacity>
                 </View>
             )}
@@ -160,6 +185,44 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#999',
         fontSize: 24,
+        fontWeight: 'bold'
+    },
+    matchContainer: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rbga(0,0,0, 0.8)',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    matchImage: {
+        height: 60,
+        resizeMode: 'contain'
+    },
+    matchAvatar: {
+        width: 160,
+        height: 160,
+        borderRadius: 80,
+        borderWidth: 5,
+        borderColor: '#fff',
+        marginVertical: 30,
+    },
+    matchName: {
+        fontSize: 26,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
+    matchBio: {
+        marginTop: 10,
+        fontSize: 16,
+        color: 'rgba(255,255,255,0.8)',
+        lineHeight: 24,
+        textAlign: 'center',
+        paddingHorizontal: 30
+    },
+    closeMatch: {
+        fontSize: 16,
+        color: 'rgba(255,255,255,0.8)',
+        textAlign: 'center',
+        marginTop: 30,
         fontWeight: 'bold'
     }
 })
